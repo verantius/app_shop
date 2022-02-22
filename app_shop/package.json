@@ -1,5 +1,5 @@
 {
-  "name": "shop",
+  "name": "app_shop",
   "version": "1.0.0",
   "description": "API sklepu",
   "main": "index.js",
@@ -11,9 +11,9 @@
     "REST",
     "shop"
   ],
-  "author": "amisiag",
+  "author": "adam misiag",
   "license": "ISC",
   "dependencies": {
-    "expresss": "^0.0.0"
+    "express": "^4.17.3"
   }
 }
