@@ -9,4 +9,17 @@ router.get('/', (req, res, next) => {
 router.post('/', (req, res, next) => {
     res.status(201).json({wiadomosc: 'Dodano nowy produkt' })
 })
+router.get("/:id", (req, res, next) =>{
+    const id = req.params.id;
+    res.status(200).json({wiadomosc: 'sczczegóły produktu o nr ' + id })
+})
+router.put("/:id", (req, res, next) =>{
+    const id = req.params.id;
+    res.status(200).json({wiadomosc: 'zmiana produktu o nr ' + id })
+})
+router.delete("/:id", (req, res, next) =>{
+    const id = req.params.id;
+    res.status(200).json({wiadomosc: 'usuniecie produktu o nr ' + id })
+})
+// :- wartosc, zmienna
 module.exports = router
