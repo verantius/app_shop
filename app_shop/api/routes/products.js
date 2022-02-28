@@ -7,7 +7,14 @@ router.get('/', (req, res, next) => {
     res.status(200).json({wiadomosc: 'Lista wszystkich produktów'})
 })
 router.post('/', (req, res, next) => {
-    res.status(201).json({wiadomosc: 'Dodano nowy produkt' })
+    const product = {
+        name: req.body.name,
+        price: req.body.price,
+    }
+    res.status(201).json({
+        wiadomosc: 'Dodano nowy produkt',
+        info: product
+     })
 })
 router.get("/:id", (req, res, next) =>{
     const id = req.params.id;
