@@ -11,7 +11,7 @@ const app = express();
 require('dotenv').config()
 
 //laaczenie z baza danych 
-mongoose.connect('mongodb+srv://shop:shop@cluster0.37tur.mongodb.net/shop?retryWrites=true&w=majority')
+mongoose.connect(`mongodb+srv://${process.env.USER}:${process.env.PASS}@cluster0.37tur.mongodb.net/${process.env.DB}?retryWrites=true&w=majority`)
 
 //parsowanie czesc body
 app.use(bodyParser.json())
