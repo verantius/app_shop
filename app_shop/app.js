@@ -4,8 +4,14 @@ const express = require('express');
 const morgan = require('morgan')
 const cors = require("cors")
 const bodyParser = require('body-parser')
+const mongoose = require('mongoose') 
 
 const app = express();
+//zmienne srodowiskowe
+require('dotenv').config()
+
+//laaczenie z baza danych 
+mongoose.connect('mongodb+srv://shop:shop@cluster0.37tur.mongodb.net/shop?retryWrites=true&w=majority')
 
 //parsowanie czesc body
 app.use(bodyParser.json())
