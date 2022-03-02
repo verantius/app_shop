@@ -19,9 +19,11 @@ app.use(morgan('combined'))
 
 //import routow
 const productRoutes = require('./api/routes/products')
+const orderRoutes = require('./api/routes/orders')
 
 //obsługa routow
 app.use('/products', productRoutes)
+app.use('/orders', orderRoutes)
 
 //jak cos uzyje serwer wykonaj te operacje
 app.use((req, res, next) => {
