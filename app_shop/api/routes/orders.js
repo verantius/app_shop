@@ -6,7 +6,14 @@ const router = express.Router()
 const Order = require('../models/order')
 
 router.get('/', (req, res, next) => {
-    res.status(200).json({wiadomosc: 'Lista wszystkich zamówień'})
+    Order.find()
+    .then(result =>{
+        res.status(200).json({
+            wiadomosc: 'Lista wszystkich zamówień',
+            info: result
+        })
+    })
+    .catch((err) => res.status(500).json({blad: err}))
 })
 
 router.post('/', (req, res, next) => {
