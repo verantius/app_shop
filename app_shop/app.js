@@ -1,6 +1,4 @@
-//instalacja expresa
 const express = require('express');
-//instalacja morgana
 const morgan = require('morgan')
 const cors = require("cors")
 const bodyParser = require('body-parser')
