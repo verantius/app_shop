@@ -25,6 +25,8 @@ router.post('/', (req, res, next) => {
     order
     .save()
     .then((result) => {
+
+        
         res.status(201).json({
             wiadomosc: 'Dodano nowe zamówienie',
             info: result, 
