@@ -16,6 +16,7 @@ router.get('/', (req, res, next) => {
             info: result,
         })
     })
+    
     .catch((err) => console.log(err))
 })
 router.post('/', (req, res, next) => {
