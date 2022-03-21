@@ -7,10 +7,11 @@ const Order = require('../models/order')
 
 router.get('/', (req, res, next) => {
     Order.find()
+    .populate("ProductId","name")
     .then(result =>{
         res.status(200).json({
             wiadomosc: 'Lista wszystkich zamówień',
-            info: result
+            info: result,
         })
     })
     .catch((err) => res.status(500).json({blad: err}))
@@ -25,8 +26,6 @@ router.post('/', (req, res, next) => {
     order
     .save()
     .then((result) => {
-
-        
         res.status(201).json({
             wiadomosc: 'Dodano nowe zamówienie',
             info: result, 

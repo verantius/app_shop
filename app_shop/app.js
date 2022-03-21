@@ -33,4 +33,4 @@ app.use('/orders', orderRoutes)
 app.use((req, res, next) => {
 res.status(200).json({wiadomosc: 'wszystko ok'})
 })
-module.exports=app
+module.exports = app;

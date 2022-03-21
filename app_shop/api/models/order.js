@@ -4,8 +4,8 @@ const mongoose = require('mongoose')
 const orderSchema = mongoose.Schema({
    _id: mongoose.Types.ObjectId,
    productId: {
-       type: moongoose.types.ObjectId,
-       ref: "Product",  //referencja do modelu productss
+       type: mongoose.Types.ObjectId,
+       ref: 'Product',  //referencja do modelu productss
 
    },
     quantity: {
@@ -14,4 +14,4 @@ const orderSchema = mongoose.Schema({
         min: 1,
     }
 })
-module.exports = mongoose.model('Product', orderSchema)
+module.exports = mongoose.model('Order', orderSchema)
