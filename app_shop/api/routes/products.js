@@ -17,11 +17,23 @@ const storage = multer.diskStorage({
       cb(null, './uploads/') //tu zmiana katalogu
     },
     filename: function (req, file, cb) {
-      cb(null, file.originalname) //tu zmiana nazwy
+      cb(null,new Date().toISOString().replace(":","_").replace(":","_") + file.originalname) //tu zmiana nazwy
     }
   })
+//filtracja plikow - akceptacja jedynie jpg
+function fileFilter (req, file, cb) {
+    if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+        cb(null,true)
+    } else {
+        cb(null, false)
+    }
+}
 
-const upload = multer({ storage: storage })
+const upload = multer({ storage: storage, limits:{
+    fileSize: 1024*1024*5,
+}, 
+    fileFilter: fileFilter,
+})
 
 router.get('/', (req, res, next) => {
     Product.find()
