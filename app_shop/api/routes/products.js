@@ -10,7 +10,18 @@ const Product = require("../models/product")
 
 //ladowanie plikow
 const multer  = require('multer')
-const upload = multer({ dest: 'uploads/' })
+
+//zmiana miejsca przechowywania plików i nazwy
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, './uploads/') //tu zmiana katalogu
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.originalname) //tu zmiana nazwy
+    }
+  })
+
+const upload = multer({ storage: storage })
 
 router.get('/', (req, res, next) => {
     Product.find()
@@ -24,6 +35,7 @@ router.get('/', (req, res, next) => {
     .catch((err) => console.log(err))
 })
 router.post('/', upload.single('productImage'), (req, res, next) => {
+    console.log(req.file)
     const product = new Product({
         _id: mongoose.Types.ObjectId(),
         name: req.body.name,
