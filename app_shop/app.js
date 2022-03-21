@@ -8,6 +8,9 @@ const app = express();
 //zmienne srodowiskowe
 require('dotenv').config()
 
+//statyczny katalog ze zdjeciami
+app.use('/uploads',express.static('uploads'))
+
 //laaczenie z baza danych 
 mongoose.connect(`mongodb+srv://${process.env.USER}:${process.env.PASS}@cluster0.37tur.mongodb.net/${process.env.DB}?retryWrites=true&w=majority`)
 
@@ -31,6 +34,6 @@ app.use('/orders', orderRoutes)
 
 //jak cos uzyje serwer wykonaj te operacje
 app.use((req, res, next) => {
-res.status(200).json({wiadomosc: 'wszystko ok'})
+res.status(404).json({wiadomosc: 'not foundo'})
 })
 module.exports = app;

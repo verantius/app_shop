@@ -14,5 +14,9 @@ const productSchema = mongoose.Schema({
         required: true,
         //bulid-in validators mangoose
     }, 
+    productImage: {
+        type: String,
+        required: true,
+    },
 })
 module.exports = mongoose.model('Product', productSchema)
