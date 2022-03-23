@@ -14,6 +14,7 @@ router.get('/', (req, res, next) => {
             info: result,
         })
     })
+    
     .catch((err) => res.status(500).json({blad: err}))
 })
 
