@@ -100,6 +100,7 @@ router.post('/', upload.single('productImage'), (req, res, next) => {
             .catch(err => console.log(err))
 })
 router.delete("/:id", (req, res, next) =>{
+    
     const id = req.params.id;
     Product.findOneAndDelete(id)
     .then(() => {
