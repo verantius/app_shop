@@ -24,16 +24,20 @@ router.post('/signup', (req, res, next) => {
             .catch((err) => res.status(500).json({ wiadomosc: err}))
         })
 })
-/* 1:56:00
+
 //logowanie
-router.post("/login",(req, res, next) =>{
+router.post("/login",(req, res, next) => {
     //wyciągam z bazy usera o znanym emailu
-    User.findOne({email: req.body.email})
-    .then(user =>{
-        if(!user)
-        return res.status(404).json({wiadomosc: 'brak takiego emaila'})
+    User.findOne({ email: req.body.email })
+    .then((user) => {
+        if(!user) {
+            return res.status(404).json({wiadomosc: 'brak takiego emaila'})
+            
+        } else {
+            return res.status(404).json({wiadomosc: 'brak takiego emaila'})
+        }
     }) 
     //walidacja hasla
 })
-*/
+
 module.exports = router
