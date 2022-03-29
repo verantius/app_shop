@@ -34,7 +34,7 @@ router.post("/login",(req, res, next) => {
             return res.status(404).json({wiadomosc: 'brak takiego emaila'})  
       } else {
             bcrypt.compare(req.body.password, user.password)
-            .then(result => {
+            .then((result) => {
                 if(!result) {
                     return res.status(404).json({wiadomosc: 'niepoprawne hasło'})
                     

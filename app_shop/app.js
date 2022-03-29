@@ -36,6 +36,6 @@ app.use('/users', userRoutes)
 
 //jak cos uzyje serwer wykonaj te operacje
 app.use((req, res, next) => {
-res.status(404).json({wiadomosc: 'not foundo'})
+res.status(404).json({ wiadomosc: 'not foundoo'})
 })
 module.exports = app;
