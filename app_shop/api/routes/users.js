@@ -31,10 +31,17 @@ router.post("/login",(req, res, next) => {
     User.findOne({ email: req.body.email })
     .then((user) => {
         if(!user) {
-            return res.status(404).json({wiadomosc: 'brak takiego emaila'})
-            
-        } else {
-            return res.status(404).json({wiadomosc: 'brak takiego emaila'})
+            return res.status(404).json({wiadomosc: 'brak takiego emaila'})  
+      } else {
+            bcrypt.compare(req.body.password, user.password)
+            .then(result => {
+                if(!result) {
+                    return res.status(404).json({wiadomosc: 'niepoprawne hasło'})
+                    
+                } else {
+                        return res.status(200).json({wiadomosc: 'zalogowano'})
+                }
+                })
         }
     }) 
     //walidacja hasla
