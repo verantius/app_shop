@@ -1,6 +1,7 @@
 const express = require("express")
 const mongoose = require("mongoose")
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
 //wyciaganie routeru
 const router = express.Router()
@@ -31,15 +32,24 @@ router.post("/login",(req, res, next) => {
     User.findOne({ email: req.body.email })
     .then((user) => {
         if(!user) {
-            return res.status(404).json({wiadomosc: 'brak takiego emaila'})  
+            return res.status(401).json({wiadomosc: 'brak autoryzacji'})  
+            //tutaj moze byc 404 i inna wiadomosc pozwalajaca na identyfikacje co jesst nie tak
       } else {
             bcrypt.compare(req.body.password, user.password)
             .then((result) => {
                 if(!result) {
-                    return res.status(404).json({wiadomosc: 'niepoprawne hasło'})
+                    return res.status(401).json({wiadomosc: 'brak autoryzacji'})
                     
                 } else {
-                        return res.status(200).json({wiadomosc: 'zalogowano'})
+                    const token = jwt.sign({
+                        email: user.email,
+                        id: user._id},
+                        process.env.JWT_KEY, {expiresIn:'1h'})
+
+                    return res.status(200).json({
+                        wiadomosc: 'zalogowano', 
+                        token: token,
+                    })
                 }
                 })
         }

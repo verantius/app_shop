@@ -8,6 +8,8 @@ const router = express.Router()
 
 const Product = require("../models/product")
 
+const auth = require('../middleware/auth')
+
 //ladowanie plikow
 const multer  = require('multer')
 
@@ -46,7 +48,8 @@ router.get('/', (req, res, next) => {
     
     .catch((err) => console.log(err))
 })
-router.post('/', upload.single('productImage'), (req, res, next) => {
+router.post('/', upload.single('productImage'), auth, (req, res, next) => {
+    //auth raczej powinno byc na 1 miejscu
     console.log(req.file)
     const product = new Product({
         _id: new mongoose.Types.ObjectId(),
@@ -78,7 +81,7 @@ router.post('/', upload.single('productImage'), (req, res, next) => {
         })
         .catch(err => console.log(err))
     })
-    router.put("/:id", (req, res, next) =>{
+    router.put("/:id", auth, (req, res, next) =>{
         const id = req.params.id;
         Product.findByIdAndUpdate(
             id, 
@@ -99,7 +102,7 @@ router.post('/', upload.single('productImage'), (req, res, next) => {
             })
             .catch(err => console.log(err))
 })
-router.delete("/:id", (req, res, next) =>{
+router.delete("/:id", auth, (req, res, next) =>{
     
     const id = req.params.id;
     Product.findOneAndDelete(id)
