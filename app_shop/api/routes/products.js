@@ -1,12 +1,7 @@
 const express = require("express")
-const mongoose = require("mongoose")
-
-//wyciaganie routeru
 const router = express.Router()
-
-//Import modelu produktu
-
-const Product = require("../models/product")
+//import kontolery
+const ProductsController = require("../controllers/products")
 
 const auth = require('../middleware/auth')
 
@@ -37,81 +32,15 @@ const upload = multer({ storage: storage, limits:{
     fileFilter: fileFilter,
 })
 
-router.get('/', (req, res, next) => {
-    Product.find()
-    .then(result => {
-        res.status(200).json({
-            wiadomosc: 'Lista wszystkich produktów',
-            info: result,
-        })
-    })
-    
-    .catch((err) => console.log(err))
-})
-router.post('/', upload.single('productImage'), auth, (req, res, next) => {
-    //auth raczej powinno byc na 1 miejscu
-    console.log(req.file)
-    const product = new Product({
-        _id: new mongoose.Types.ObjectId(),
-        name: req.body.name,
-        price: req.body.price,
-        productImage: req.file.path
-    })
-    product
-        .save()
-        .then((result) =>{
-            res.status(201).json({
-                wiadomosc: 'Dodano nowy produkt',
-                info: result,
-            })
-        })
-        .catch(err => console.log(err))
-        
-        
-    })
-    router.get("/:id", (req, res, next) =>{
-        const id = req.params.id;
-        Product.findById(id)
-        .then((result) => {
-            res.status(200).json({
-                wiadomosc: 'sczczegóły produktu o nr ' + id,
-                info: result,
-            })
-            
-        })
-        .catch(err => console.log(err))
-    })
-    router.put("/:id", auth, (req, res, next) =>{
-        const id = req.params.id;
-        Product.findByIdAndUpdate(
-            id, 
-            {
-            name: req.body.name,
-            price: req.body.price
-            },
-            {
-                new:true,
-            }
-        )
-            .then((result) =>{
-                res.status(200).json({
-                    wiadomosc: 'zmiana produktu o nr ' + id,
-                    info: result,
-                    
-                })
-            })
-            .catch(err => console.log(err))
-})
-router.delete("/:id", auth, (req, res, next) =>{
-    
-    const id = req.params.id;
-    Product.findOneAndDelete(id)
-    .then(() => {
-        res.status(200).json({wiadomosc: 'usuniecie produktu o nr ' + id })
+router.get('/', ProductsController.products_get_all)
 
-    })
-    .catch(err => console.log(err))
+router.post('/', upload.single('productImage'), auth, ProductsController.products_add_new)
 
-})
+router.get("/:id", ProductsController.products_get_by_id)
+
+router.put("/:id", auth, ProductsController.products_change)
+
+router.delete("/:id", auth, ProductsController.products_remove)
+
 // :- wartosc, zmienna
 module.exports = router
