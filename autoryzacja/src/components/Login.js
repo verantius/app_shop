@@ -1,9 +1,10 @@
 import { useState } from "react"
 import bootstrap from "../../node_modules/bootstrap/dist/css/bootstrap.min.css"
-import './login.css'
+import './Login.css'
+
 const Login = () => {
-    const [UserName, setUserName] = useState('')
-    const [password, setUserPassword] = useState('')
+    //const [UserName, setUserName] = useState('')
+    //const [password, setUserPassword] = useState('')
     return (
         <div>
             <div className="row jutify-content-center">
@@ -13,12 +14,12 @@ const Login = () => {
                             type="text" 
                             placeholder="wpisz nazwe uzytkownika" 
                             className="form-control"
-                            onChange={(e) => setUserName(e.target.value)}
-                            value={userName}
+                            //onChange={(e) => setUserName(e.target.value)}
+                            //value={userName}
                         />        
                         <input 
                             type="password" 
-                            placeholder="wpisz nazwe uzytkownika" 
+                            placeholder="wpisz haslo" 
                             className="form-control"
                         />        
                         <input 
