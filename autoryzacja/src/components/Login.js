@@ -10,9 +10,9 @@ const Login = () => {
     const validate = (e) => {
         e.preventDefault()
         if (userName === 'admin' && password === 'admin123'){
-            swal('witaj adminie', "witamy na naszej stronie", 'succes')
+            swal('witaj adminie', "witamy na naszej stronie", "success")
         }else{
-            swal('zle dane logowania',"wpisz poprawny username",'error')
+            swal('zle dane logowania',"wpisz poprawny username","error")
         }
     }
     
