@@ -118,4 +118,28 @@ exports.products_get_by_id = (req, res, next) => {
     })
     .catch(err => console.log(err))
 } 
+-
+/*
+exports.products_add_new =  (req, res, next) => {
+    //auth raczej powinno byc na 1 miejscu
+    console.log(req.file)
+    const product = new Product({
+        _id: new mongoose.Types.ObjectId(),
+        name: req.body.name,
+        price: req.body.price,
+        productImage: req.file.path
+    })
+    product
+        .save()
+        .then((result) =>{
+            res.status(201).json({
+                wiadomosc: 'Dodano nowy produkt',
+                info: result,
+            })
+        })
+        .catch(err => console.log(err))
+        
+        
+}
+-
 */
